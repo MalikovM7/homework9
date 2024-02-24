@@ -107,9 +107,15 @@ alter table [dbo].[Products]
 add constraint FK_Products_Categories FOREIGN KEY([CategoryId]) REFERENCES [dbo].[Categories]([Id])
 
 create table SpecificationValues(
-[SpecificationId] int primary key identity(1,1),
+[SpecificationId] int ,
 [ProductId] int,
-[Value] nvarchar(100) )
+[Value] nvarchar(100)
+ CONSTRAINT PK_SpecificationValues PRIMARY KEY ([ProductId],[SpecificationId])
+
+)
+
+  drop table  SpecificationValues
+
 
 alter table [dbo].[SpecificationValues]
 add constraint FK_SpecificationValues_Products FOREIGN KEY([ProductId]) REFERENCES [dbo].[Products]([Id])
@@ -139,7 +145,6 @@ create table Specifications(
   )
 
 
-
 alter table [dbo].[SpecificationValues]
 add constraint FK_SpecificationValues_Specifications FOREIGN KEY([SpecificationId]) REFERENCES [dbo].[Specifications]([Id])
 
@@ -165,6 +170,7 @@ create table BlogPosts(
 
   alter table [dbo].[BlogPosts]
 add constraint FK_BlogPosts_Categories FOREIGN KEY([CategoryId]) REFERENCES [dbo].[Categories]([Id])
+
 
 
 
